@@ -22,6 +22,7 @@ body {
     aspect-ratio: 1.7 / 3;
     position: relative;
     background-color: black;
+    box-shadow: 5px 5px 10px black, -5px 5px 10px black;
     
 }
 
@@ -40,6 +41,13 @@ body {
     padding-right: 3%;
 }
 
+#current-time {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    font-size: 1.5em;
+}
+
 #result {
     position: absolute;
     bottom: 10%;
@@ -47,19 +55,12 @@ body {
     font-size: 3.5em;
 }
 
-#second-operand {
+#operation-display {
     position: absolute;
     bottom: 50%;
     right: 2%;
     font-size: 2.5em;
 
-}
-
-#first-operand {
-    position: absolute;
-    bottom: 70%;
-    right: 2%;
-    font-size: 2.5em;
 }
 
 .numbers-and-operators {
@@ -109,6 +110,16 @@ body {
 }
 
 .operator1 {
+    background-color: #9f9f9f;
+    color: #010101;
+}
+
+.equals {
+    background-color: #f69906;
+    color: #f5f6f6;
+}
+
+.acpm {
     background-color: #9f9f9f;
     color: #010101;
 }
