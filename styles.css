@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+.calculator-container {
+    display: grid;
+    gap: 20px;
+    border: 0.1em solid white;
+    border-radius: 2em;
+    height: 70vh;
+    margin: auto;
+    margin-top: 8%;
+    aspect-ratio: 1.7 / 3;
+    position: relative;
+    background-color: black;
+    
+}
+
+.display {
+    overflow: hidden;
+    grid-row: 1;
+    grid-column: 1;
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    position: relative;
+}
+.display p {
+    text-align: end;
+    color: #f5f6f6;
+    padding-right: 3%;
+}
+
+#result {
+    position: absolute;
+    bottom: 10%;
+    right: 2%;
+    font-size: 3.5em;
+}
+
+#second-operand {
+    position: absolute;
+    bottom: 50%;
+    right: 2%;
+    font-size: 2.5em;
+
+}
+
+#first-operand {
+    position: absolute;
+    bottom: 70%;
+    right: 2%;
+    font-size: 2.5em;
+}
+
+.numbers-and-operators {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-row: 2;
+    text-align: center;
+    background-color: black;
+    border-radius: 2em;
+    padding: 2%;
+}
+
+.numbers-and-operators button:hover {
+    filter: brightness(110%);
+}
+
+.numbers-and-operators button:active{
+    filter: brightness(120%);
+    box-shadow: 0 0.1em #666
+}
+
+.numbers-and-operators button{
+    font-size: 2em;
+    border-radius: 2em;
+    border: none;
+}
+
+.number {
+    background-color: rgb(56, 55, 55);
+    color: #f5f6f6;
+}
+
+#dot {
+    background-color: rgb(56, 55, 55);
+    color: #f5f6f6;
+}
+
+#zero {
+    grid-column: 1 / span 2;
+}
+
+.operator {
+    background-color: #f69906;
+    color: #f5f6f6;
+}
+
+.operator1 {
+    background-color: #9f9f9f;
+    color: #010101;
+}
+
