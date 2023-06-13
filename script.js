@@ -101,11 +101,14 @@ dot.addEventListener('click', (e)=> {
 });
 
 equals.addEventListener('click', (e)=>{
-    let result = operate(parseFloat(firstOperand),parseFloat(secondOperand),currentOperator);
-    updateResultDisplay("=" + result);
-    secondOperand = result;
-    firstOperand = "";
-})
+    if (firstOperand != "" && secondOperand != ""){
+        let result = operate(parseFloat(firstOperand),parseFloat(secondOperand),currentOperator);
+        updateResultDisplay("=" + result);
+        secondOperand = result;
+        firstOperand = "";
+    };
+    
+});
 
 operators.forEach(operator => {
     operator.addEventListener('click', (e)=>{
