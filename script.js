@@ -6,12 +6,11 @@ let numbers = document.querySelectorAll(".number");
 let equals = document.querySelector(".equals");
 let acpm = document.querySelectorAll(".acpm");
 let dot = document.getElementById("dot");
-let numberArray = [];
 let currentOperator = "";
 let firstOperand = "";
 let secondOperand = "";
+let lastOperator;
 let result;
-let dotCount = 0;
 
 
 function add(number1,number2){
@@ -31,6 +30,9 @@ function multiply(number1,number2){
 
 function divide(number1,number2){
     let result = number2 / number1;
+    if (number1 == 0){
+        return "undefined";
+    }
     return result;
 };
 
@@ -62,12 +64,12 @@ function operate(number1,number2,operator){
 function getCurrentTime(){
     setInterval(function(){
         var today = new Date();
-        currentTime.innerHTML = today.getHours() + ":" + today.getMinutes();
+        currentTime.textContent = today.getHours() + ":" + today.getMinutes();
     }, 1000);
 };
 
 function updateResultDisplay(number) {
-    resultDisplay.innerHTML = number;
+    resultDisplay.textContent = number;
 };
 
 function updateOperationDisplay(){
@@ -77,8 +79,7 @@ function updateOperationDisplay(){
 function getNumber(){
     numbers.forEach(number => {
         number.addEventListener('click', (e)=>{
-            numberArray.push(number.value);
-            firstOperand = numberArray.join("");
+            firstOperand = firstOperand + number.value;
             updateResultDisplay(firstOperand);
             updateOperationDisplay();
             console.log(firstOperand);
@@ -88,34 +89,47 @@ function getNumber(){
 };
 
 function addDot(){
-        numberArray.push(".");
-        firstOperand = numberArray.join("");
-        updateOperationDisplay(firstOperand);
+        firstOperand = firstOperand + ".";
+        updateOperationDisplay();
         updateResultDisplay(firstOperand);
-        dotCount++;
 };
 
 dot.addEventListener('click', (e)=> {
-    if (dotCount < 1){
+    if (!firstOperand.includes(".") && firstOperand != ""){
         addDot();
     }
 });
 
 equals.addEventListener('click', (e)=>{
     let result = operate(parseFloat(firstOperand),parseFloat(secondOperand),currentOperator);
-    updateResultDisplay(result + "=");
-    firstOperand = result;
-    dotCount--;
+    updateResultDisplay("=" + result);
+    secondOperand = result;
+    firstOperand = "";
 })
 
 operators.forEach(operator => {
     operator.addEventListener('click', (e)=>{
         currentOperator = operator.value;
-        secondOperand = firstOperand;
-        firstOperand = "";
-        numberArray = [];
-        dotCount--;
-        updateOperationDisplay();
+        if (secondOperand == ""){
+            secondOperand = firstOperand;
+            firstOperand = "";
+            updateOperationDisplay();
+        }
+
+        else {
+            if (firstOperand == ""){
+                currentOperator = operator.value;
+                updateOperationDisplay();
+            }
+            else {
+                let result = operate(parseFloat(firstOperand),parseFloat(secondOperand),lastOperator);
+                secondOperand = result;
+                firstOperand = "";
+                updateOperationDisplay();
+            }
+            
+        }
+        lastOperator = currentOperator;
     })
 });
 
@@ -124,16 +138,22 @@ acpm.forEach(element => {
         if (element.value == "AC"){
             firstOperand = "";
             secondOperand = "";
-            numberArray = [];
             currentOperator = "";
-            dotCount--;
-            updateOperationDisplay("");
+            updateOperationDisplay();
             updateResultDisplay("");
         }
         else if (element.value == "+/-"){
-            firstOperand = firstOperand * -1;
-            updateOperationDisplay(firstOperand);
-            updateResultDisplay(firstOperand);
+            if (firstOperand != ""){
+                firstOperand = firstOperand * -1;
+                updateOperationDisplay();
+                updateResultDisplay(firstOperand);
+            }
+            else {
+                secondOperand = secondOperand * -1;
+                updateOperationDisplay();
+                updateResultDisplay(secondOperand);
+            }
+            
         }
     })
     
